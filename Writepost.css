@@ -3,4 +3,87 @@ html, body{
     height: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    background: rgba(59, 105, 120, 0.7);
+}
+
+.postbox{
+    width: 1054px;
+    height: 452px;
+    margin: auto;
+    margin-top: 183px;
+    background: rgba(202, 232, 213, 0.3);
+}
+
+.topbox{
+    width: 990px;
+    height: 80px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.selectbox{
+    width: 100%;
+    height: 35px;
+    margin: auto;
+    color: #000000;
+    font-size: 18px;
+    font-family: '나눔고딕';
+    padding-left: 10px;
+    border: none;
+    outline: none;
+}
+
+.selectbox option{
+    background: rgba(202, 232, 213, 0.6);
+}
+
+.inputtext {
+    width: 980px;
+    height: 35px;
+    margin-top: 8px;
+    color: #000000;
+    font-size: 18px;
+    font-family: '나눔고딕';
+    padding: 0px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}
+
+.inputbox{
+    width: 990px;
+    height: 200px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: #ffffff;
+}
+
+.textbox{
+    width: 880px;
+    height: 160px;
+    margin: 18px 50px;
+    color: #000000;
+    font-size: 24px;
+    font-family: '나눔고딕';
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+.buttonbox{
+    width: 140px;
+    height: 40px;
+    margin: auto;
+    margin-top: 55px;
+}
+
+.button{
+    width: 100%;
+    height: 100%;
+    background: #204051;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: '나눔고딕';
 }
