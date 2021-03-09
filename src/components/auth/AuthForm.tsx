@@ -240,7 +240,12 @@ const AuthForm: React.FC<{
           />
         )}
         <Button
-          disabled={nameError || emailError || passwordError || !emailChecked}
+          disabled={
+            nameError ||
+            emailError ||
+            passwordError ||
+            (!emailChecked && type === 'register')
+          }
           authType={type}
           type="submit"
         >

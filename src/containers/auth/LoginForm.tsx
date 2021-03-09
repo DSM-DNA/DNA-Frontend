@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
@@ -27,12 +27,10 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     const res = await login(state.email, state.password);
     if (res) {
-      if (res.status === 201) {
-        dispatch({ type: 'SET_TOKEN', token: res.body['access-token'] });
-        dispatch({ type: 'SET_REFTOKEN', reftoken: res.body['refresh-token'] });
-        setError(false);
-        history.push('/adenine');
-      }
+      dispatch({ type: 'SET_TOKEN', token: res.body['access-token'] });
+      dispatch({ type: 'SET_REFTOKEN', reftoken: res.body['refresh-token'] });
+      setError(false);
+      history.push('/write');
     } else {
       setError(true);
       return;
