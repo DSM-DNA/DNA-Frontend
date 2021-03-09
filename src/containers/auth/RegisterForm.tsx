@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
 import { register } from '../../lib/api/auth';
@@ -6,6 +7,8 @@ import { register } from '../../lib/api/auth';
 const RegisterForm: React.FC = () => {
   const state = useUserState();
   const dispatch = useUserDispatch();
+
+  const history = useHistory();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -30,7 +33,10 @@ const RegisterForm: React.FC = () => {
     const res = await register(state.name, state.email, state.password);
     if (res) {
       if (res === 201) {
+        alert('회원가입 성공');
+        history.push('/login');
       } else {
+        return;
       }
     }
   };

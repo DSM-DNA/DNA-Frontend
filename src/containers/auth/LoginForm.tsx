@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
 import { login } from '../../lib/api/auth';
 const LoginForm: React.FC = () => {
   const state = useUserState();
   const dispatch = useUserDispatch();
+
+  const history = useHistory();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -28,6 +31,7 @@ const LoginForm: React.FC = () => {
         dispatch({ type: 'SET_TOKEN', token: res.body['access-token'] });
         dispatch({ type: 'SET_REFTOKEN', reftoken: res.body['refresh-token'] });
         setError(false);
+        history.push('/adenine');
       }
     } else {
       setError(true);
