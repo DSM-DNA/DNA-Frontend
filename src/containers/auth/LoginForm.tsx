@@ -28,6 +28,7 @@ const LoginForm: React.FC = () => {
         dispatch({ type: 'SET_TOKEN', token: res.body['access-token'] });
         dispatch({ type: 'SET_REFTOKEN', reftoken: res.body['refresh-token'] });
         setError(false);
+        console.log('login');
       }
     } else {
       setError(true);

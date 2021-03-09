@@ -57,3 +57,14 @@ export const refresh = (refToken: string) => {
       return null;
     });
 };
+
+export const logout = async (token: string) => {
+  try {
+    const res = await client.get('/logout', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.status;
+  } catch {
+    return null;
+  }
+};
