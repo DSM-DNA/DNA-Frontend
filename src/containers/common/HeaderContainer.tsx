@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '../../components/common/Header';
+import { useLocation } from 'react-router-dom';
 
-const HeaderContainer: React.FC<{ path: string }> = ({ path }) => {
-  return <Header path={path} />;
+const HeaderContainer: React.FC = () => {
+  const location = useLocation();
+  return <Header path={location.pathname} />;
 };
 
 export default HeaderContainer;

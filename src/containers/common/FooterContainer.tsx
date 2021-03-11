@@ -14,9 +14,9 @@ const FooterContainer: React.FC = () => {
   ) => void = async () => {
     const res = await logout(state.token);
     if (res === 200) {
-      history.push('/login');
       dispatch({ type: 'SET_TOKEN', token: '' });
       dispatch({ type: 'SET_REFTOKEN', reftoken: '' });
+      history.push('/login');
     } else {
       alert('로그아웃 실패');
       return;

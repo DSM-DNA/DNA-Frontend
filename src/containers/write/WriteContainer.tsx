@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Editor from '../../components/write/Editor';
 import { useUserState, useUserDispatch } from '../../contexts/user';
 import { useHistory } from 'react-router-dom';
-import {
-  AskPostModal,
-  ConfirmPostModal,
-} from '../../components/modal/PostModal';
-import { writePost } from '../../lib/api/writepost';
+import { AskPostModal } from '../../components/modal/AskPostModal';
+import { ConfirmPostModal } from '../../components/modal/ConfirmPostModal';
+import { writePost } from '../../lib/api/post';
 
 const WriteContainer: React.FC = () => {
   const state = useUserState();
