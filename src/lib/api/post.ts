@@ -15,3 +15,14 @@ export const writePost = async (
     return null;
   }
 };
+
+export const getPost = async (token: string, type: string) => {
+  try {
+    const res = client.get(`/timeline/${type}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res;
+  } catch {
+    return null;
+  }
+};
