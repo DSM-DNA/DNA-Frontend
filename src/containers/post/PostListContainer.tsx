@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import PostItem from '../../components/post/PostItem';
 import PostList from '../../components/post/PostList';
 import { useUserState } from '../../contexts/user';
-import { getPost } from '../../lib/api/post';
+import { getPost, removePost } from '../../lib/api/post';
 
 interface IPost {
-  id?: number;
+  timelineId?: number;
   title?: string;
   content?: string;
   name?: string;
@@ -49,12 +49,24 @@ const PostListContainer: React.FC = () => {
     <PostList>
       {posts?.map((post) => (
         <PostItem
-          key={post.id as number}
+          key={post.timelineId as number}
           title={post.title as string}
           content={post.content as string}
           author={'작성자: ' + (post.name as string)}
           isMine={post.isMine as boolean}
           createdAt={(post.createdAt as string)?.substring(0, 10)}
+          onRemove={async () => {
+            const res = await removePost(
+              state.token,
+              post.timelineId as number,
+            );
+            if (res) {
+              alert('삭제 성공');
+              getPosts();
+            } else {
+              alert('삭제 실패');
+            }
+          }}
         />
       ))}
     </PostList>

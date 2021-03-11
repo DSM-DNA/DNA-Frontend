@@ -96,14 +96,15 @@ const PostItem: React.FC<{
   author: string;
   isMine: boolean;
   createdAt: string;
-}> = ({ title, content, author, isMine, createdAt }) => {
+  onRemove: React.MouseEventHandler<HTMLImageElement>;
+}> = ({ title, content, author, isMine, createdAt, onRemove }) => {
   return (
     <ItemBox>
       <InnerBox>
         <Title>{title}</Title>
         <Author>{author}</Author>
         <Date>{createdAt}</Date>
-        {isMine && <Delete onClick={() => {}} />}
+        {isMine && <Delete onClick={onRemove} />}
       </InnerBox>
       <InnerBox>
         <Content>{content}</Content>
