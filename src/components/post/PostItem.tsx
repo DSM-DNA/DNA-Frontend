@@ -103,13 +103,7 @@ const PostItem: React.FC<{
         <Title>{title}</Title>
         <Author>{author}</Author>
         <Date>{createdAt}</Date>
-        {isMine && (
-          <Delete
-            onClick={() => {
-              console.log('remove');
-            }}
-          />
-        )}
+        {isMine && <Delete onClick={() => {}} />}
       </InnerBox>
       <InnerBox>
         <Content>{content}</Content>

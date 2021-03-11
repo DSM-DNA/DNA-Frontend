@@ -38,7 +38,6 @@ const PostListContainer: React.FC = () => {
     const res = await getPost(state.token, path() as string);
     if (res) {
       setPosts(res.data.timelineResponses);
-      console.log(res.data.timelineResponses);
     }
   };
 
