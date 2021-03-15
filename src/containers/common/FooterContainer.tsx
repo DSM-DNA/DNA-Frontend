@@ -9,7 +9,7 @@ const FooterContainer: React.FC = () => {
   const dispatch = useUserDispatch();
   const history = useHistory();
 
-  const onClick: (
+  const onClickLogout: (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => void = async () => {
     const res = await logout(state.token);
@@ -22,7 +22,7 @@ const FooterContainer: React.FC = () => {
       return;
     }
   };
-  return <Footer onClick={onClick} />;
+  return <Footer onClick={onClickLogout} />;
 };
 
 export default FooterContainer;

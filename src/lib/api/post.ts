@@ -16,9 +16,10 @@ export const writePost = async (
   }
 };
 
-export const getPost = async (token: string, type: string) => {
+export const getPost = async (token: string, type: string, page: number) => {
   try {
     const res = client.get(`/timeline/${type}`, {
+      params: { size: 6, page: page },
       headers: { Authorization: `Bearer ${token}` },
     });
     return res;

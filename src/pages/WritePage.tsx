@@ -7,9 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 const WritePage: React.FC<RouteComponentProps> = ({ match }) => {
   return (
     <>
-      <HeaderContainer
-        path={match.path.slice(1, match.path.indexOf('/', 1) - 1)}
-      />
+      <HeaderContainer />
       <WriteContainer />
       <FooterContainer />
     </>
