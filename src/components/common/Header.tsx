@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const HeaderBox = styled.div`
   width: 100vw;
@@ -181,19 +181,19 @@ const SvgC: React.FC<{
   );
 };
 
-const Header: React.FC<{ path: string }> = ({ path }) => {
+const Header: React.FC = () => {
   const history = useHistory();
-
+  const path = history.location.pathname;
   return (
     <HeaderBox>
       <SvgA
-        fill={path === 'adenine' ? '#931A25' : '#ffffff'}
+        fill={path === '/adenine' ? '#931A25' : '#ffffff'}
         onClick={() => {
           history.push('/adenine');
         }}
       />
       <SvgG
-        fill={path === 'guanine' ? '#931A25' : '#ffffff'}
+        fill={path === '/guanine' ? '#931A25' : '#ffffff'}
         onClick={() => {
           history.push('/guanine');
         }}
@@ -207,13 +207,13 @@ const Header: React.FC<{ path: string }> = ({ path }) => {
       />
       <Space />
       <SvgC
-        fill={path === 'citosine' ? '#931A25' : '#ffffff'}
+        fill={path === '/citosine' ? '#931A25' : '#ffffff'}
         onClick={() => {
           history.push('/citosine');
         }}
       />
       <SvgT
-        fill={path === 'thymine' ? '#931A25' : '#ffffff'}
+        fill={path === '/thymine' ? '#931A25' : '#ffffff'}
         onClick={() => {
           history.push('/thymine');
         }}
