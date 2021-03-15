@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Editor from '../../components/write/Editor';
 import { useUserState, useUserDispatch } from '../../contexts/user';
 import { useHistory } from 'react-router-dom';
-import { AskPostModal } from '../../components/modal/AskPostModal';
-import { ConfirmPostModal } from '../../components/modal/ConfirmPostModal';
+import AskPostUpModal from '../../components/modal/AskPostUpModal';
+import ConfirmPostUpModal from '../../components/modal/ConfirmPostUpModal';
 import { writePost } from '../../lib/api/post';
 
 const WriteContainer: React.FC = () => {
@@ -86,8 +86,8 @@ const WriteContainer: React.FC = () => {
         onChange={onChange}
         state={{ type, title, content }}
       />
-      {showAsk && <AskPostModal onClick={onClick} />}
-      {showConfirm && <ConfirmPostModal />}
+      {showAsk && <AskPostUpModal onClick={onClick} />}
+      {showConfirm && <ConfirmPostUpModal />}
     </>
   );
 };

@@ -39,7 +39,7 @@ const StyledTitle = styled.h1`
   padding-top: 120px;
 `;
 
-export const ConfirmPostModal: React.FC = () => {
+const ConfirmPostUpModal: React.FC = () => {
   return (
     <MainBlock>
       <MarginBox>
@@ -50,3 +50,5 @@ export const ConfirmPostModal: React.FC = () => {
     </MainBlock>
   );
 };
+
+export default ConfirmPostUpModal;
