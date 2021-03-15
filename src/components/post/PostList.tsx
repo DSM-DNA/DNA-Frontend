@@ -14,6 +14,7 @@ const ListBlock = styled.div`
 
 const ListBox = styled.div`
   margin-top: 34px;
+  overflow-y: auto;
 `;
 
 const PostList: React.FC = ({ children }) => {

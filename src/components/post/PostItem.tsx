@@ -81,7 +81,7 @@ const Delete: React.FC<{
       width="70px"
       height="70px"
       style={{
-        position: 'absolute',
+        objectFit: 'contain',
         cursor: 'pointer',
         flex: 1,
         right: '90px',
