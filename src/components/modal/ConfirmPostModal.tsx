@@ -11,15 +11,14 @@ const MainBlock = styled.div`
   display: flex;
 `;
 
-const ConfirmMarginBox = styled.div`
+const MarginBox = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(${palette.darkcyan}, 0.7);
-  z-index: -1;
 `;
 
-const ConfirmModalContent = styled.div`
+const ModalContent = styled.div`
   width: 780px;
   height: 300px;
   background-color: #ffffff;
@@ -29,8 +28,8 @@ const ConfirmModalContent = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: -440px;
-  margin-top: -155px;
+  margin-left: -390px;
+  margin-top: -150px;
 `;
 
 const StyledTitle = styled.h1`
@@ -43,11 +42,11 @@ const StyledTitle = styled.h1`
 export const ConfirmPostModal: React.FC = () => {
   return (
     <MainBlock>
-      <ConfirmMarginBox>
-        <ConfirmModalContent>
+      <MarginBox>
+        <ModalContent>
           <StyledTitle>게시물이 등록되었습니다.</StyledTitle>
-        </ConfirmModalContent>
-      </ConfirmMarginBox>
+        </ModalContent>
+      </MarginBox>
     </MainBlock>
   );
 };
