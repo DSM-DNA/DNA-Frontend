@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import AskPostRemoveModal from '../../components/modal/AskPostRemoveModal';
+import ConfirmPostRemoveModal from '../../components/modal/ConfirmPostRemoveModal';
 import LoadMoreButton from '../../components/post/LoadMoreButton';
 import PostItem from '../../components/post/PostItem';
 import PostList from '../../components/post/PostList';
 import { useUserState } from '../../contexts/user';
 import { getPost, removePost } from '../../lib/api/post';
+import CommentContainer from '../comment/CommentContainer';
 
 interface IPost {
   timelineId?: number;
@@ -22,6 +25,11 @@ const PostListContainer: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>();
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(0);
+  const [showAsk, setShowAsk] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showComment, setShowComment] = useState(false);
+  const [commentId, setCommentId] = useState(0);
+  const [removeId, setRemoveId] = useState(0);
 
   const location = useLocation();
   const path = () => {
@@ -57,6 +65,29 @@ const PostListContainer: React.FC = () => {
     setPage(page + 1);
   };
 
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    switch (e.currentTarget.name) {
+      case 'submit':
+        rmPost();
+        break;
+      case 'cancel':
+        setShowAsk(false);
+        break;
+    }
+  };
+
+  const rmPost = async () => {
+    const res = await removePost(state.token, removeId);
+    if (res) {
+      setShowAsk(false);
+      setShowConfirm(true);
+      setTimeout(() => {
+        setShowConfirm(false);
+        setPosts(posts?.filter((post) => post.timelineId !== removeId));
+      }, 2000);
+    }
+  };
+
   useEffect(() => {
     getPosts();
   }, [page]);
@@ -72,22 +103,30 @@ const PostListContainer: React.FC = () => {
             author={'작성자: ' + (post.name as string)}
             isMine={post.isMine as boolean}
             createdAt={(post.createdAt as string)?.substring(0, 10)}
-            onRemove={async () => {
-              const res = await removePost(
-                state.token,
-                post.timelineId as number,
-              );
-              if (res) {
-                alert('삭제 성공');
-                getPosts();
-              } else {
-                alert('삭제 실패');
-              }
+            onClick={() => {
+              setCommentId(post.timelineId as number);
+              setShowComment(true);
+            }}
+            onRemove={() => {
+              setRemoveId(post.timelineId as number);
+              setShowAsk(true);
             }}
           />
         ))}
       </PostList>
       <LoadMoreButton onClick={onLoadMore} />
+      {showAsk && <AskPostRemoveModal onClick={onClick} />}
+      {showConfirm && <ConfirmPostRemoveModal />}
+      {showComment && (
+        <CommentContainer
+          onClose={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowComment(false);
+            }
+          }}
+          timelineId={commentId}
+        />
+      )}
     </>
   );
 };
