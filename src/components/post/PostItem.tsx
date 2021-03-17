@@ -61,7 +61,7 @@ const Date = styled.text`
 `;
 
 const Content = styled.text`
-  font-family: NanumGothic;
+  font-family: 'Nanum Gothic';
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -96,15 +96,21 @@ const PostItem: React.FC<{
   author: string;
   isMine: boolean;
   createdAt: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
   onRemove: React.MouseEventHandler<HTMLImageElement>;
-}> = ({ title, content, author, isMine, createdAt, onRemove }) => {
+}> = ({ title, content, author, isMine, createdAt, onClick, onRemove }) => {
   return (
-    <ItemBox>
+    <ItemBox onClick={onClick}>
       <InnerBox>
         <Title>{title}</Title>
         <Author>{author}</Author>
         <Date>{createdAt}</Date>
         {isMine && <Delete onClick={onRemove} />}
+        {!isMine && (
+          <div
+            style={{ width: '70px', height: '70px', flex: '1', right: '90px' }}
+          />
+        )}
       </InnerBox>
       <InnerBox>
         <Content>{content}</Content>
