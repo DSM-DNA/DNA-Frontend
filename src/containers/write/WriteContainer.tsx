@@ -75,7 +75,7 @@ const WriteContainer: React.FC = () => {
       setTimeout(() => {
         setShowConfirm(false);
         history.goBack();
-      }, 3000);
+      }, 2000);
     }
   };
 
