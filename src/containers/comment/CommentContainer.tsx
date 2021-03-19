@@ -64,7 +64,9 @@ const CommentContainer: React.FC<{
   const onSubmit: (comment: string) => void = async (comment) => {
     const res = writeComment(state.token, timelineId, comment);
     if (res) {
-      alert('댓글 쓰기 성공');
+      setTimeout(() => {
+        getComment();
+      }, 500);
     } else {
       alert('댓글 쓰기 실패');
     }
