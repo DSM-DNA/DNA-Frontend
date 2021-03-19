@@ -73,8 +73,8 @@ const AskPostUpModal: React.FC<{
       <MarginBox>
         <ModalContent>
           <TextBox>
-            <h1>게시물을 삭제하시겠습니까?</h1>
-            <h4>게시물을 삭제한 후에는 게시물을 다시 불러올 수 없습니다.</h4>
+            <h1>게시물을 등록하시겠습니까?</h1>
+            <h4>게시물을 등록한 후에는 수정하실 수 없습니다.</h4>
           </TextBox>
           <ButtonBox>
             <button onClick={onClick} name="submit">
