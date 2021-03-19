@@ -84,7 +84,7 @@ const PostListContainer: React.FC = () => {
       setTimeout(() => {
         setShowConfirm(false);
         setPosts(posts?.filter((post) => post.timelineId !== removeId));
-      }, 2000);
+      }, 1000);
     }
   };
 
@@ -103,9 +103,11 @@ const PostListContainer: React.FC = () => {
             author={'작성자: ' + (post.name as string)}
             isMine={post.isMine as boolean}
             createdAt={(post.createdAt as string)?.substring(0, 10)}
-            onClick={() => {
-              setCommentId(post.timelineId as number);
-              setShowComment(true);
+            onClick={(e) => {
+              if (e.target !== e.currentTarget.querySelector('.Trashcan')) {
+                setCommentId(post.timelineId as number);
+                setShowComment(true);
+              }
             }}
             onRemove={() => {
               setRemoveId(post.timelineId as number);

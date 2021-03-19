@@ -80,10 +80,10 @@ const Delete: React.FC<{
       onClick={onClick}
       width="70px"
       height="70px"
+      className="Trashcan"
       style={{
         objectFit: 'contain',
         cursor: 'pointer',
-        flex: 1,
         right: '90px',
       }}
     />
@@ -107,9 +107,7 @@ const PostItem: React.FC<{
         <Date>{createdAt}</Date>
         {isMine && <Delete onClick={onRemove} />}
         {!isMine && (
-          <div
-            style={{ width: '70px', height: '70px', flex: '1', right: '90px' }}
-          />
+          <div style={{ width: '70px', height: '70px', right: '90px' }} />
         )}
       </InnerBox>
       <InnerBox>

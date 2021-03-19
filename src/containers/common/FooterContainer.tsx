@@ -39,7 +39,7 @@ const FooterContainer: React.FC = () => {
       dispatch({ type: 'SET_TOKEN', token: '' });
       dispatch({ type: 'SET_REFTOKEN', reftoken: '' });
       history.push('/login');
-    }, 2000);
+    }, 1000);
   };
   return (
     <>

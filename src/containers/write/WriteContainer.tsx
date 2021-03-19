@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Editor from '../../components/write/Editor';
-import { useUserState, useUserDispatch } from '../../contexts/user';
+import { useUserState } from '../../contexts/user';
 import { useHistory } from 'react-router-dom';
 import AskPostUpModal from '../../components/modal/AskPostUpModal';
 import ConfirmPostUpModal from '../../components/modal/ConfirmPostUpModal';
@@ -8,7 +8,6 @@ import { writePost } from '../../lib/api/post';
 
 const WriteContainer: React.FC = () => {
   const state = useUserState();
-  const dispatch = useUserDispatch();
 
   const history = useHistory();
 
@@ -74,8 +73,8 @@ const WriteContainer: React.FC = () => {
       setShowConfirm(true);
       setTimeout(() => {
         setShowConfirm(false);
-        history.goBack();
-      }, 2000);
+        history.push('/adenine');
+      }, 1000);
     }
   };
 
