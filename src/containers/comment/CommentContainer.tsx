@@ -57,7 +57,7 @@ const CommentContainer: React.FC<{
         setComments(
           comments?.filter((comment) => comment.commentId !== commentId),
         );
-      }, 2000);
+      }, 1000);
     }
   };
 

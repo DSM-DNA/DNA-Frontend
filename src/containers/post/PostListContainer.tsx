@@ -84,7 +84,7 @@ const PostListContainer: React.FC = () => {
       setTimeout(() => {
         setShowConfirm(false);
         setPosts(posts?.filter((post) => post.timelineId !== removeId));
-      }, 2000);
+      }, 1000);
     }
   };
 
