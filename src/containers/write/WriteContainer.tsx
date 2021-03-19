@@ -74,7 +74,7 @@ const WriteContainer: React.FC = () => {
       setShowConfirm(true);
       setTimeout(() => {
         setShowConfirm(false);
-        history.goBack();
+        history.push('/adenine');
       }, 2000);
     }
   };
