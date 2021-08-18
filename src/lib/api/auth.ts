@@ -1,14 +1,5 @@
 import client from './client';
 
-export const emailCheck = async (email: string) => {
-  try {
-    const res = await client.get('/email', { params: { email: email } });
-    return res.status;
-  } catch {
-    return null;
-  }
-};
-
 export const register = async (
   name: string,
   email: string,
