@@ -1,5 +1,28 @@
 import client from './client';
 
+export const requestVerify = async (email: string) => {
+  try {
+    const res = await client.post('/email', {
+      email,
+    });
+    return res.status;
+  } catch {
+    return null;
+  }
+};
+
+export const verifyEmail = async (email: string, verifyCode: string) => {
+  try {
+    const res = await client.patch('/email', {
+      email,
+      verifyCode,
+    });
+    return res.status;
+  } catch {
+    return null;
+  }
+};
+
 export const register = async (
   name: string,
   email: string,
