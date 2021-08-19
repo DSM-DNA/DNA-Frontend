@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import { State } from '../../contexts/user';
-import { emailCheck } from '../../lib/api/auth';
+import { requestVerify } from '../../lib/api/auth';
+import EmailVerifyModal from '../modal/EmailVerifyModal';
 
 const StyledAuthForm = styled.div`
   display: flex;
@@ -128,7 +129,7 @@ const AuthForm: React.FC<{
   type: string;
   state: State;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: () => void;
   error: boolean;
 }> = ({ type, state, onChange, onSubmit, error }) => {
   const authTextEn = authMapEn[type];
@@ -138,6 +139,8 @@ const AuthForm: React.FC<{
   const [passwordError, setPasswordError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [emailChecked, setEmailChecked] = useState(false);
+  const [showVerify, setShowVerify] = useState(false);
+  const [verified, setVerified] = useState(false);
 
   useEffect(() => {
     if (state.password !== state.passwordConfirm && type === 'register') {
@@ -155,6 +158,12 @@ const AuthForm: React.FC<{
     }
   }, [state.name]);
 
+  useEffect(() => {
+    if (verified === true) {
+      setShowVerify(false);
+    }
+  }, [verified]);
+
   const check = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (
       !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
@@ -165,10 +174,11 @@ const AuthForm: React.FC<{
       setEmailChecked(false);
       return;
     }
-    const res = await emailCheck(state.email);
+    const res = await requestVerify(state.email);
     if (res) {
       setEmailError(false);
       setEmailChecked(true);
+      setShowVerify(true);
       return;
     } else {
       setEmailError(true);
@@ -176,88 +186,99 @@ const AuthForm: React.FC<{
     }
   };
 
-  return (
-    <StyledAuthForm>
-      <span>{authTextEn}</span>
-      {type === 'register' && (
-        <CheckButton onClick={check}>중복 확인</CheckButton>
-      )}
-      {type === 'login' && error && (
-        <ErrorMsg type="login">이메일 또는 비밀번호가 잘못되었습니다</ErrorMsg>
-      )}
-      {nameError && <ErrorMsg type="name">이름을 입력하세요</ErrorMsg>}
-      {emailError && (
-        <ErrorMsg type="email">이메일 형식이 올바른지 확인해 주세요</ErrorMsg>
-      )}
-      {passwordError && (
-        <ErrorMsg type="pw">비밀번호가 일치하지 않습니다</ErrorMsg>
-      )}
+  const checkVerified = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (type === 'register' && verified === false) {
+      alert('이메일 인증이 완료되지 않았습니다.');
+    } else {
+      onSubmit();
+    }
+  };
 
-      <form onSubmit={onSubmit}>
+  return (
+    <>
+      <StyledAuthForm>
+        <span>{authTextEn}</span>
         {type === 'register' && (
-          <StyledInput
-            autoComplete="on"
-            type="text"
-            name="name"
-            placeholder="이름을 입력해 주세요"
-            authType="register"
-            onChange={onChange}
-            value={state.name}
-            error={nameError}
-          />
+          <CheckButton onClick={check}>중복 확인</CheckButton>
         )}
-        <StyledInput
-          autoComplete="email"
-          type="email"
-          name="email"
-          placeholder="이메일을 입력해 주세요"
-          autoFocus
-          authType={type}
-          onChange={onChange}
-          value={state.email}
-          error={emailError || error}
-        />
-        <StyledInput
-          autoComplete="on"
-          type="password"
-          name="password"
-          placeholder="비밀번호를 입력해 주세요"
-          authType={type}
-          onChange={onChange}
-          value={state.password}
-          error={error}
-        />
-        {type === 'register' && (
+        {type === 'login' && error && (
+          <ErrorMsg type="login">
+            이메일 또는 비밀번호가 잘못되었습니다
+          </ErrorMsg>
+        )}
+        {nameError && <ErrorMsg type="name">이름을 입력하세요</ErrorMsg>}
+        {emailError && (
+          <ErrorMsg type="email">이메일 형식이 올바른지 확인해 주세요</ErrorMsg>
+        )}
+        {passwordError && (
+          <ErrorMsg type="pw">비밀번호가 일치하지 않습니다</ErrorMsg>
+        )}
+
+        <form onSubmit={checkVerified}>
+          {type === 'register' && (
+            <StyledInput
+              autoComplete="on"
+              type="text"
+              name="name"
+              placeholder="이름을 입력해 주세요"
+              authType="register"
+              onChange={onChange}
+              value={state.name}
+              error={nameError}
+            />
+          )}
+          <StyledInput
+            autoComplete="email"
+            type="email"
+            name="email"
+            placeholder="이메일을 입력해 주세요"
+            autoFocus
+            authType={type}
+            onChange={onChange}
+            value={state.email}
+            error={emailError || error}
+          />
           <StyledInput
             autoComplete="on"
             type="password"
-            name="passwordConfirm"
-            placeholder="비밀번호를 확인해 주세요"
-            authType="register"
+            name="password"
+            placeholder="비밀번호를 입력해 주세요"
+            authType={type}
             onChange={onChange}
-            value={state.passwordConfirm}
-            error={passwordError}
+            value={state.password}
+            error={error}
           />
+          {type === 'register' && (
+            <StyledInput
+              autoComplete="on"
+              type="password"
+              name="passwordConfirm"
+              placeholder="비밀번호를 확인해 주세요"
+              authType="register"
+              onChange={onChange}
+              value={state.passwordConfirm}
+              error={passwordError}
+            />
+          )}
+          <Button
+            disabled={nameError || emailError || passwordError}
+            authType={type}
+            type="submit"
+          >
+            {authTextKo}
+          </Button>
+        </form>
+        {type === 'login' && (
+          <Footer>
+            <Link to="/register">아직 계정이 없으신가요?</Link>
+          </Footer>
         )}
-        <Button
-          disabled={
-            nameError ||
-            emailError ||
-            passwordError ||
-            (!emailChecked && type === 'register')
-          }
-          authType={type}
-          type="submit"
-        >
-          {authTextKo}
-        </Button>
-      </form>
-      {type === 'login' && (
-        <Footer>
-          <Link to="/register">아직 계정이 없으신가요?</Link>
-        </Footer>
+      </StyledAuthForm>
+      {showVerify && (
+        <EmailVerifyModal email={state.email} setVerified={setVerified} />
       )}
-    </StyledAuthForm>
+    </>
   );
 };
 

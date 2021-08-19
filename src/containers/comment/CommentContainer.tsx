@@ -62,7 +62,7 @@ const CommentContainer: React.FC<{
   };
 
   const onSubmit: (comment: string) => void = async (comment) => {
-    const res = writeComment(state.token, timelineId, comment);
+    const res = await writeComment(state.token, timelineId, comment);
     if (res) {
       setTimeout(() => {
         getComment();

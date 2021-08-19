@@ -7,7 +7,6 @@ import AskLogoutModal from '../../components/modal/AskLogoutModal';
 import ConfirmLogoutModal from '../../components/modal/ConfirmLogoutModal';
 
 const FooterContainer: React.FC = () => {
-  const state = useUserState();
   const dispatch = useUserDispatch();
   const history = useHistory();
 

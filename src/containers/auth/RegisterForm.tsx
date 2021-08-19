@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
@@ -28,8 +28,7 @@ const RegisterForm: React.FC = () => {
     }
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     const res = await register(state.name, state.email, state.password);
     if (res) {
       if (res === 201) {

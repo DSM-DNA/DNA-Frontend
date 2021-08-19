@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/styles/palette';
 
 const InnerContent = styled.div`
   width: 893px;

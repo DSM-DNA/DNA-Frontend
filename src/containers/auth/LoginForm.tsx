@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
@@ -23,8 +23,7 @@ const LoginForm: React.FC = () => {
 
   const [error, setError] = useState(false);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     const res = await login(state.email, state.password);
     if (res) {
       dispatch({ type: 'SET_TOKEN', token: res.body['access-token'] });
