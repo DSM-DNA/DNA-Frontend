@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import { State } from '../../contexts/user';
-import { requestVerify, verifyEmail } from '../../lib/api/auth';
+import { requestVerify } from '../../lib/api/auth';
 import EmailVerifyModal from '../modal/EmailVerifyModal';
 
 const StyledAuthForm = styled.div`
