@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 import { useUserState, useUserDispatch } from '../../contexts/user';
