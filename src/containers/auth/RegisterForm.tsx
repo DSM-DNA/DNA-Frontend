@@ -28,8 +28,7 @@ const RegisterForm: React.FC = () => {
     }
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     const res = await register(state.name, state.email, state.password);
     if (res) {
       if (res === 201) {
